@@ -1,21 +1,19 @@
-# macOS
-.DS_Store
-.AppleDouble
-.LSOverride
-
-# Thumbnails
-._*
+# AI 临时输出目录（不提交）
+.agent/
 
 # IDE
-.vscode/
 .idea/
-*.swp
-*.swo
-*~
+.vscode/
+*.iml
+
+# macOS
+.DS_Store
 
 # Temporary files
 *.tmp
-*.bak
+*.temp
+*.swp
+*~
 
 # Logs
 *.log
