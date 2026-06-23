@@ -182,12 +182,23 @@
 
 ---
 
-## 🔴 完整版（20个字段）
+## 🔴 完整版（23个字段）
 
 ### 适用场景
 - ACK-FULL (完整流程)
 - 复杂改动：重构模块、架构变更、技术决策
 - 涉及文件: 10+ 个
+
+### 字段分类
+- **核心字段** (5个，必填): Compliance_Status, Target_Files, Changes_Summary, Test_Run, Summary
+- **架构相关** (3个): Architecture_Impact, Affected_Modules, Solid_Touch
+- **约束检查** (1个): Constraint_Checklist_Status
+- **测试验证** (2个): API_Test_Evidence, Reverse_Proof
+- **性能影响** (1个): Performance_Impact
+- **依赖变更** (2个): Dependencies_Added, Migration_SQL
+- **度量指标** (5个): KVC_Before, KVC_After, SCV_Before, SCV_After, Complexity_Justification
+- **回滚相关** (1个): Rollback_Plan
+- **知识沉淀** (3个): ADR_Required, FAQ_Update, Documentation_Updated
 
 ### 模板
 
