@@ -29,7 +29,7 @@
 ### 持久化文件（提交 Git）
 
 ```
-project-kernel/                   # 项目知识库
+kernel-template/                   # 项目知识库
 ├── 03_决策日志/                 # ADR 决策记录
 │   ├── ADR-001.md
 │   └── ADR-002.md
@@ -78,10 +78,10 @@ project-kernel/                   # 项目知识库
 
 ```bash
 # AI 识别到技术决策时
-输出位置: project-kernel/03_决策日志/ADR-{number}-{title}.md
+输出位置: kernel-template/03_决策日志/ADR-{number}-{title}.md
 
 # 示例
-project-kernel/03_决策日志/ADR-006-缓存方案选型.md
+kernel-template/03_决策日志/ADR-006-缓存方案选型.md
 ```
 
 ---
@@ -90,10 +90,10 @@ project-kernel/03_决策日志/ADR-006-缓存方案选型.md
 
 ```bash
 # AI 生成 SQL 时
-输出位置: project-kernel/db/migrations/V{timestamp}__{description}.sql
+输出位置: kernel-template/db/migrations/V{timestamp}__{description}.sql
 
 # 示例
-project-kernel/db/migrations/V20260623_143000__add_user_email.sql
+kernel-template/db/migrations/V20260623_143000__add_user_email.sql
 ```
 
 ---
@@ -102,7 +102,7 @@ project-kernel/db/migrations/V20260623_143000__add_user_email.sql
 
 ```bash
 # AI 识别到常见问题时
-追加到: project-kernel/04_答疑库.md
+追加到: kernel-template/04_答疑库.md
 
 # 格式
 ### Q: {问题}
@@ -135,7 +135,7 @@ project-kernel/db/migrations/V20260623_143000__add_user_email.sql
 - ✅ 会话记录（每次 /archive 自动模式）
 - ✅ 临时文件（中间结果）
 
-### 何时输出到 project-kernel/
+### 何时输出到 kernel-template/
 
 - ✅ ADR 决策（重要技术决策）
 - ✅ SQL 脚本（数据库变更）
@@ -181,9 +181,9 @@ AI: 开始归档...
     - 2 个 SQL 脚本
     - 3 个 FAQ 条目
     
-    ✅ ADR 已创建: project-kernel/03_决策日志/ADR-006-缓存方案选型.md
-    ✅ SQL 已保存: project-kernel/db/migrations/V20260623_143000__add_cache.sql
-    ✅ FAQ 已更新: project-kernel/04_答疑库.md
+    ✅ ADR 已创建: kernel-template/03_决策日志/ADR-006-缓存方案选型.md
+    ✅ SQL 已保存: kernel-template/db/migrations/V20260623_143000__add_cache.sql
+    ✅ FAQ 已更新: kernel-template/04_答疑库.md
     ✅ 会话已归档: .agent/sessions/session_20260623_143000.md
 ```
 

@@ -32,7 +32,7 @@
 **使用方法**:
 1. 在做出重要架构决策时，复制模板
 2. 命名：`ADR-{编号}-{简短标题}.md`
-3. 保存到项目的 `project-kernel/03_决策日志/`
+3. 保存到项目的 `kernel-template/03_决策日志/`
 
 **命名示例**:
 - `ADR-001-选择Redis作为缓存.md`
@@ -70,7 +70,7 @@
 ```
 1. 讨论架构方案
 2. 使用 adr-template.md 记录决策
-3. 保存到 project-kernel/03_决策日志/
+3. 保存到 kernel-template/03_决策日志/
 4. 在 Evidence Block 中引用 ADR 编号
 ```
 
@@ -92,7 +92,7 @@
 cp templates/constraint-checklist-template.md .agent/constraint-checklist.md
 
 # 复制 ADR 模板
-cp templates/adr-template.md project-kernel/03_决策日志/ADR-001-XXX.md
+cp templates/adr-template.md kernel-template/03_决策日志/ADR-001-XXX.md
 
 # 复制 Evidence 模板
 cp templates/evidence-block-template.md .agent/evidence-template.md

@@ -103,8 +103,8 @@ common-workflows-java/
 ├── workflows/                     # 精简版工作流（指令卡片）⭐
 │   ├── 00_领航员.md              [123行] - 任务调度中心
 │   ├── 01_启动自检.md            [52行]  - 系统启动
-│   ├── 02_规约形式化.md          [108行] - 约束清单生成
-│   ├── 03_需求雷达.md            [98行]  - 需求分析+智能分流
+│   ├── 02_需求雷达.md            [98行]  - 需求分析+智能分流
+│   ├── 03_规约形式化.md          [108行] - 约束清单生成
 │   ├── 04_受控执行.md            [105行] - 编码开发
 │   ├── 05_度量分析.md            [109行] - KVC/SCV度量
 │   ├── 06_业务测试.md            [133行] - API/E2E测试
@@ -200,18 +200,18 @@ cp -r /path/to/common-workflows-java/workflows .agent/
 #### Step 3: 初始化项目内核
 
 ```bash
-mkdir -p project-kernel
-cp -r /path/to/common-workflows-java/kernel-template/* project-kernel/
+mkdir -p kernel-template
+cp -r /path/to/common-workflows-java/kernel-template/* kernel-template/
 ```
 
 #### Step 4: 定制项目内核
 
 ```bash
 # 编辑项目信息
-vim project-kernel/00_系统总纲.md
+vim kernel-template/00_系统总纲.md
 
 # 填充编码规范
-vim project-kernel/02_开发规约/01_编码规范.md
+vim kernel-template/02_开发规约/01_编码规范.md
 ```
 
 </details>
@@ -251,8 +251,8 @@ vim project-kernel/02_开发规约/01_编码规范.md
 | 命令 | 说明 | 耗时 | 别名 |
 |------|------|------|------|
 | `/boot` | 启动自检 | 5 min | `/01` |
-| `/constraint` | 规约形式化 | 10 min | `/02` |
-| `/radar` | 需求雷达 + 智能分流 | 15 min | `/03` |
+| `/radar` | 需求雷达 + 智能分流 | 15 min | `/02` |
+| `/constraint` | 规约形式化 | 10 min | `/03` |
 | `/execute` | 受控执行 | 20-60 min | `/04` |
 | `/measure` | 度量分析 | 5 min | `/05` |
 | `/test` | 业务测试 | 15 min | `/06` |

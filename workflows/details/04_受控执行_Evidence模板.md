@@ -402,7 +402,7 @@
   ✅ 是
   - ADR 编号: ADR-006
   - 决策标题: "采用 Caffeine 本地缓存优化查询性能"
-  - 记录位置: project-kernel/03_决策日志/ADR-006.md
+  - 记录位置: kernel-template/03_决策日志/ADR-006.md
 
 **FAQ_Update**: 
   ✅ 已添加 FAQ 条目：

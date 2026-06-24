@@ -100,7 +100,7 @@ your-project/
 ├── src/
 ├── pom.xml
 ├── README.md
-└── project-kernel/              ← 唯一需要的
+└── kernel-template/              ← 唯一需要的
     ├── 00_系统总纲.md
     ├── 02_开发规约/
     │   ├── 01_编码规范.md
@@ -110,7 +110,7 @@ your-project/
     └── 05_项目进度.md
 ```
 
-**只需 project-kernel/ 一个文件夹！**
+**只需 kernel-template/ 一个文件夹！**
 
 **优势**:
 - ✅ 项目规约持久化
@@ -177,7 +177,7 @@ Hermes:
   → write_file: 创建 ADR
   → 更新 FAQ
   
-  ✅ 已归档到 project-kernel/
+  ✅ 已归档到 kernel-template/
 ```
 
 ---
@@ -243,12 +243,12 @@ hermes workflow collaborate \
 
 ## ❓ 常见问题
 
-### Q1: 必须创建 project-kernel/ 吗？
+### Q1: 必须创建 kernel-template/ 吗？
 
 **A**: **不需要！**
 
 - **小白**: 零配置，直接用
-- **进阶**: 创建 project-kernel/ 持久化知识
+- **进阶**: 创建 kernel-template/ 持久化知识
 
 ---
 
@@ -257,7 +257,7 @@ hermes workflow collaborate \
 **A**: **不需要！**
 
 - workflows/ 在 Hermes skill 中（全局一次）
-- 每个项目只需要 project-kernel/（可选）
+- 每个项目只需要 kernel-template/（可选）
 
 ---
 
@@ -281,7 +281,7 @@ hermes> /boot
 
 # 方式2: 完整模式
 hermes> 帮我初始化 Sentinel Kernel 项目结构
-# Hermes 自动创建 project-kernel/
+# Hermes 自动创建 kernel-template/
 ```
 
 ---
@@ -299,7 +299,7 @@ hermes> 帮我初始化 Sentinel Kernel 项目结构
 
 ### 进阶使用建议
 
-1. **创建 project-kernel/**（知识积累）
+1. **创建 kernel-template/**（知识积累）
 2. **填写项目规约**（提高准确率）
 3. **记录 ADR**（技术决策）
 4. **定期执行 /measure**（质量追踪）

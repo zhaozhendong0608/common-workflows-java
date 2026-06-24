@@ -3,7 +3,7 @@
 """
 AI 项目内核初始化脚本
 
-自动分析项目，生成 project-kernel/ 目录和基础规约
+自动分析项目，生成 kernel-template/ 目录和基础规约
 """
 
 import os
@@ -148,7 +148,7 @@ def generate_system_overview(project_dir, project_name, tech_stack):
 ├── src/                  # 源代码
 ├── docs/                 # 文档
 ├── scripts/              # 脚本
-└── project-kernel/       # 项目内核（本目录）
+└── kernel-template/       # 项目内核（本目录）
 ```
 
 ---
@@ -364,7 +364,7 @@ def init_project_kernel(project_dir, template_dir):
     """初始化项目内核"""
     project_dir = Path(project_dir)
     template_dir = Path(template_dir)
-    kernel_dir = project_dir / "project-kernel"
+    kernel_dir = project_dir / "kernel-template"
     
     # 检测项目名称
     project_name = project_dir.name
@@ -474,15 +474,15 @@ def init_project_kernel(project_dir, template_dir):
     print("  1. 编辑 00_系统总纲.md，补充项目信息")
     print("  2. 检查 02_开发规约/，根据实际情况调整")
     print("  3. 提交到 Git:")
-    print("     git add project-kernel/")
+    print("     git add kernel-template/")
     print("     git commit -m 'init: 初始化项目内核'")
     print()
 
 
 def main():
     if len(sys.argv) < 2:
-        print("用法: python init-project-kernel.py <项目目录>")
-        print("示例: python init-project-kernel.py /path/to/your-project")
+        print("用法: python init-kernel-template.py <项目目录>")
+        print("示例: python init-kernel-template.py /path/to/your-project")
         sys.exit(1)
     
     project_dir = sys.argv[1]

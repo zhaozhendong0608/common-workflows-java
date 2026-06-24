@@ -6,23 +6,23 @@
 
 ## 📜 脚本列表
 
-### init-project-kernel.py ⭐
+### init-kernel-template.py ⭐
 
-**功能**: 自动初始化项目内核（project-kernel/）
+**功能**: 自动初始化项目内核（kernel-template/）
 
 **使用方法**:
 ```bash
 # 在旧项目中初始化
-python scripts/init-project-kernel.py /path/to/your-project
+python scripts/init-kernel-template.py /path/to/your-project
 
 # 示例
-python scripts/init-project-kernel.py ~/my-old-project
+python scripts/init-kernel-template.py ~/my-old-project
 ```
 
 **脚本会自动**:
 1. ✅ 检测项目技术栈（Spring Boot, MyBatis, Vue.js 等）
 2. ✅ 分析编码风格（命名、注释语言、格式）
-3. ✅ 创建 project-kernel/ 目录结构
+3. ✅ 创建 kernel-template/ 目录结构
 4. ✅ 生成基础规约文件：
    - 00_系统总纲.md（根据检测结果生成）
    - 01_项目全景.md（复制模板）
@@ -66,13 +66,13 @@ python scripts/init-project-kernel.py ~/my-old-project
 ✅ 项目内核初始化完成！
 ============================================================
 
-📂 生成位置: /path/to/your-project/project-kernel
+📂 生成位置: /path/to/your-project/kernel-template
 
 📋 后续步骤:
   1. 编辑 00_系统总纲.md，补充项目信息
   2. 检查 02_开发规约/，根据实际情况调整
   3. 提交到 Git:
-     git add project-kernel/
+     git add kernel-template/
      git commit -m 'init: 初始化项目内核'
 ```
 
@@ -103,9 +103,9 @@ python scripts/auto-archive.py
 ```
 
 **功能**:
-- 提取 SQL 脚本 → `project-kernel/db/migrations/`
-- 识别技术讨论 → `project-kernel/03_决策日志/`（ADR 草稿）
-- 提取代码片段 → `project-kernel/snippets/`
+- 提取 SQL 脚本 → `kernel-template/db/migrations/`
+- 识别技术讨论 → `kernel-template/03_决策日志/`（ADR 草稿）
+- 提取代码片段 → `kernel-template/snippets/`
 - 生成会话摘要 → `docs/session_summary_{timestamp}.md`
 
 ---
@@ -130,13 +130,13 @@ mkdir new-project && cd new-project
 git init
 
 # 2. 初始化内核
-python /path/to/common-workflows-java/scripts/init-project-kernel.py .
+python /path/to/common-workflows-java/scripts/init-kernel-template.py .
 
 # 3. 补充信息
-vim project-kernel/00_系统总纲.md
+vim kernel-template/00_系统总纲.md
 
 # 4. 提交
-git add project-kernel/
+git add kernel-template/
 git commit -m "init: 初始化项目内核"
 ```
 
@@ -148,16 +148,16 @@ git commit -m "init: 初始化项目内核"
 cd your-old-project
 
 # 2. 初始化内核（自动分析）
-python /path/to/common-workflows-java/scripts/init-project-kernel.py .
+python /path/to/common-workflows-java/scripts/init-kernel-template.py .
 
 # 3. 检查生成的规约
-cat project-kernel/00_系统总纲.md
-cat project-kernel/02_开发规约/01_编码规范.md
+cat kernel-template/00_系统总纲.md
+cat kernel-template/02_开发规约/01_编码规范.md
 
 # 4. 根据实际情况调整
 
 # 5. 提交
-git add project-kernel/
+git add kernel-template/
 git commit -m "init: 初始化项目内核"
 ```
 
@@ -165,7 +165,7 @@ git commit -m "init: 初始化项目内核"
 
 ## 🔧 依赖要求
 
-### init-project-kernel.py
+### init-kernel-template.py
 - Python 3.6+
 - 标准库（无需额外依赖）
 

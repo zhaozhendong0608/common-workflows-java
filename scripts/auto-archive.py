@@ -32,7 +32,7 @@ class ArchiveManager:
         
         # 归档目录
         self.docs_dir = os.path.join(project_root, 'docs')
-        self.kernel_dir = os.path.join(project_root, 'project-kernel')
+        self.kernel_dir = os.path.join(project_root, 'kernel-template')
         self.migrations_dir = os.path.join(self.kernel_dir, 'db', 'migrations')
         self.adr_dir = os.path.join(self.kernel_dir, '03_决策日志')
         self.snippets_dir = os.path.join(self.kernel_dir, 'snippets')
@@ -325,9 +325,9 @@ class ArchiveManager:
 
 ## 📁 归档位置
 
-- **SQL 脚本**: `project-kernel/db/migrations/`
-- **ADR 草稿**: `project-kernel/03_决策日志/`
-- **代码片段**: `project-kernel/snippets/`
+- **SQL 脚本**: `kernel-template/db/migrations/`
+- **ADR 草稿**: `kernel-template/03_决策日志/`
+- **代码片段**: `kernel-template/snippets/`
 - **会话摘要**: `docs/session_summary_{timestamp}.md`
 
 ---
@@ -381,7 +381,7 @@ class ArchiveManager:
         print("1. 审查自动生成的文件")
         print("2. 完善 ADR 草稿")
         print("3. 提交到 Git:")
-        print("   git add project-kernel/ docs/")
+        print("   git add kernel-template/ docs/")
         print("   git commit -m 'chore: 归档会话内容'")
 
 
