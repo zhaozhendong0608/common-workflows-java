@@ -1,201 +1,312 @@
-# 模板文件
+# 多语言模板体系说明
 
-本目录包含工作流中使用的各类模板文件。
-
-## 📄 模板清单
-
-### 1. constraint-checklist-template.md - 约束清单模板
-- **用途**: 在 `03_规约形式化` 阶段生成约束清单
-- **包含内容**:
-  - P0 约束（强制 - Must）
-  - P1 约束（建议 - Should）
-  - P2 约束（可选 - Could）
-  - FSM 状态序列
-  - 人工检查清单
-
-**使用方法**:
-1. 复制模板到项目的 `.agent/constraint-checklist.yml`
-2. 根据项目实际情况填充内容
-3. 在 `04_受控执行` 阶段逐项检查
+> AI 驱动开发平台 - 项目初始化模板库
 
 ---
 
-### 2. adr-template.md - ADR 架构决策记录模板
-- **用途**: 记录重要的架构决策
-- **包含内容**:
-  - 背景 (Context)
-  - 决策 (Decision)
-  - 备选方案 (Alternatives)
-  - 后果 (Consequences)
-  - 实施细节 (Implementation)
+## 📁 目录结构
 
-**使用方法**:
-1. 在做出重要架构决策时，复制模板
-2. 命名：`ADR-{编号}-{简短标题}.md`
-3. 保存到项目的 `kernel-template/03_决策日志/`
-
-**命名示例**:
-- `ADR-001-选择Redis作为缓存.md`
-- `ADR-002-采用微服务架构.md`
-
----
-
-### 3. evidence-block-template.md - Evidence Block 模板
-- **用途**: 在 `04_受控执行` 阶段生成 Evidence Block
-- **包含内容**:
-  - 🟢 精简版（5 字段）- 小改动
-  - 🟡 标准版（8 字段）- 新增功能
-  - 🔴 完整版（20 字段）- 架构变更
-
-**使用方法**:
-1. 根据流程类型选择对应深度
-2. 复制模板并填充实际值
-3. 或使用脚本自动生成：`./scripts/evidence-gen.sh <lite|standard|full>`
-
----
-
-## 🎯 使用场景
-
-### 场景1：开始新任务
 ```
-1. 执行 02_需求雷达
-2. 根据分流建议确定流程类型
-3. 执行 03_规约形式化
-   → 使用 constraint-checklist-template.md 生成约束清单
-4. 执行 04_受控执行
-   → 使用 evidence-block-template.md 生成 Evidence
-```
-
-### 场景2：重大架构决策
-```
-1. 讨论架构方案
-2. 使用 adr-template.md 记录决策
-3. 保存到 kernel-template/03_决策日志/
-4. 在 Evidence Block 中引用 ADR 编号
-```
-
-### 场景3：项目初始化
-```
-1. 复制所有模板到项目
-2. 根据项目特点调整模板内容
-3. 团队评审并达成共识
-4. 作为项目标准使用
+common-workflows-java/
+│
+├── templates/                          # 多语言模板库
+│   │
+│   ├── java/                          # Java 项目模板
+│   │   ├── kernel-template/           # 项目内核模板（插值）
+│   │   │   ├── 00_系统总纲.md         # {{project.name}}
+│   │   │   ├── 01_项目全景.md         # {{tech.backend.framework}}
+│   │   │   ├── 02_开发规约/
+│   │   │   ├── 03_决策日志.md
+│   │   │   ├── 04_答疑库.md
+│   │   │   ├── 05_项目进度.md
+│   │   │   └── 06_业务拓扑.md
+│   │   ├── project-config.schema.json  # 配置验证
+│   │   └── project-config.example.yml  # 配置示例
+│   │
+│   ├── python/                        # Python 项目模板
+│   │   ├── kernel-template/           # （待创建）
+│   │   ├── project-config.schema.json
+│   │   └── project-config.example.yml
+│   │
+│   ├── nodejs/                        # Node.js 项目模板
+│   │   ├── kernel-template/           # （待创建）
+│   │   ├── project-config.schema.json
+│   │   └── project-config.example.yml
+│   │
+│   └── common/                        # 语言无关通用模板
+│       └── workflows/                 # Sentinel Kernel 工作流
+│           ├── 00_领航员.md
+│           ├── 01_启动自检.md
+│           ├── 02_需求雷达.md
+│           ├── 03_规约形式化.md
+│           └── ...
+│
+├── scripts/                           # 初始化引擎
+│   ├── init-project.py               # 主初始化脚本 ⭐
+│   ├── validate-config.py            # 配置验证
+│   └── check-placeholders.py         # 占位符检测
+│
+└── kernel-template/                   # 原始模板（已迁移到 templates/java/）
 ```
 
 ---
 
-## 📝 模板使用指南
+## 🎯 设计理念
 
-### 1. 复制模板
-```bash
-# 复制约束清单模板
-cp templates/constraint-checklist-template.md .agent/constraint-checklist.md
+### 1. 模板化（Template-based）
 
-# 复制 ADR 模板
-cp templates/adr-template.md kernel-template/03_决策日志/ADR-001-XXX.md
+所有内核文件使用 **Jinja2 插值语法**：
 
-# 复制 Evidence 模板
-cp templates/evidence-block-template.md .agent/evidence-template.md
-```
-
-### 2. 填充占位符
-
-模板中的占位符使用 `{PLACEHOLDER}` 格式，需要替换为实际值：
-
-| 占位符 | 说明 | 示例 |
-|--------|------|------|
-| {PROJECT_NAME} | 项目名称 | etl_station |
-| {TIMESTAMP} | 时间戳 | 2026-06-23 12:00:00 |
-| {TASK_DESCRIPTION} | 任务描述 | 实现用户管理 CRUD |
-| {MAINTAINER} | 维护人 | 张三 |
-| {NUMBER} | ADR 编号 | 001 |
-| {DECISION_TITLE} | 决策标题 | 选择 Redis 作为缓存 |
-
-### 3. 自定义模板
-
-可以根据项目需要自定义模板：
-
-```bash
-# 复制模板
-cp templates/adr-template.md templates/adr-template-custom.md
-
-# 编辑自定义模板
-vim templates/adr-template-custom.md
-```
-
----
-
-## 🛠️ 模板维护
-
-### 添加新模板
-1. 创建模板文件（Markdown 格式）
-2. 添加 YAML frontmatter（description 字段）
-3. 使用 `{PLACEHOLDER}` 标记需要填充的字段
-4. 添加使用说明
-5. 更新本 README
-
-### 模板命名规范
-- 使用小写字母和连字符
-- 格式：`<功能>-template.md`
-- 示例：`constraint-checklist-template.md`
-
-### 模板结构规范
 ```markdown
+# 00_系统总纲.md
+
+**项目名称**: {{project.name}}
+**技术栈**: {{tech.backend.framework}} {{tech.backend.version}}
+
+{% for module in modules -%}
+- {{module.name}}: {{module.description}}
+{% endfor -%}
+```
+
+### 2. 配置驱动（Config-driven）
+
+通过 YAML 配置文件驱动项目生成：
+
+```yaml
+# project-config.yml
+project:
+  name: "智明工业数据平台"
+  code: "etl-station"
+  owner: "张三"
+
+tech:
+  backend:
+    framework: "Spring Boot"
+    version: "2.7.5"
+```
+
+### 3. 多语言支持（Multi-language）
+
+每种语言独立模板目录：
+- `templates/java/` - Java + Spring Boot + MyBatis
+- `templates/python/` - Python + Django/FastAPI
+- `templates/nodejs/` - Node.js + Express/Nest.js
+
+### 4. 通用工作流（Common Workflows）
+
+Sentinel Kernel 工作流语言无关：
+- 01_启动自检
+- 02_需求雷达
+- 03_规约形式化
+- ...
+
 ---
-description: 模板用途简述
----
 
-# 模板标题
+## 🚀 使用流程
 
-**字段1**: {PLACEHOLDER1}
-**字段2**: {PLACEHOLDER2}
+### Step 1: 创建配置文件
 
-## 章节1
-内容...
+```bash
+# 从示例复制
+cp templates/java/project-config.example.yml my-project-config.yml
 
-## 使用说明
-1. 步骤1
-2. 步骤2
+# 编辑配置
+vim my-project-config.yml
+```
 
----
+### Step 2: 运行初始化脚本
 
-**模板版本**: vX.Y.Z
+```bash
+python scripts/init-project.py \
+  --config my-project-config.yml \
+  --output ./my-new-project \
+  --language java
+```
+
+### Step 3: 查看生成结果
+
+```bash
+my-new-project/
+├── project-kernel/              # ✅ 已渲染的项目内核
+│   ├── 00_系统总纲.md          # 项目信息已填充
+│   ├── 01_项目全景.md          # 技术栈已填充
+│   └── ...
+├── .hermes/
+│   └── workflows/              # ✅ 工作流已复制
+├── custom-standards/           # 自定义规范（如有）
+└── README.md                   # ✅ 自动生成
 ```
 
 ---
 
-## 📚 相关资源
+## 📋 配置文件说明
 
-### 工作流文档
-- [02_需求雷达](../workflows/02_需求雷达.md) - 任务规划
-- [03_规约形式化](../workflows/03_规约形式化.md) - 约束清单
-- [04_受控执行](../workflows/04_受控执行.md) - Evidence Block
+### Java 项目配置
 
-### 脚本工具
-- [evidence-gen.sh](../scripts/evidence-gen.sh) - Evidence 生成脚本
-- [constraint-check.sh](../scripts/constraint-check.sh) - 约束检查脚本
+**必填字段**：
+```yaml
+project:
+  name: "项目名称"             # 必填
+  code: "project-code"         # 必填，小写+连字符
+  owner: "技术负责人"          # 必填
+
+tech:
+  backend:
+    framework: "Spring Boot"   # 必选
+  database:
+    type: "MySQL"             # 必选
+```
+
+**可选字段**：
+```yaml
+modules:                      # 业务模块列表
+  - name: "用户管理"
+    code: "user"
+    description: "用户CRUD"
+
+custom:
+  coding_standards: "./custom.md"  # 自定义规范
+```
+
+### 完整示例
+
+参考：
+- `templates/java/project-config.example.yml`
+- `templates/python/project-config.example.yml`
 
 ---
 
-## 🤝 贡献指南
+## 🛠️ 扩展新语言
 
-### 反馈改进建议
-如果在使用模板时发现问题或有改进建议：
+### 添加 Go 语言支持
 
-1. 在项目中使用模板
-2. 记录遇到的问题
-3. 提出改进建议
-4. 提交 Pull Request
+1. **创建目录结构**
+```bash
+mkdir -p templates/go/kernel-template/02_开发规约
+```
 
-### 分享自定义模板
-如果你创建了有价值的自定义模板：
+2. **创建配置 schema**
+```bash
+vim templates/go/project-config.schema.json
+```
 
-1. 确保模板通用性
-2. 添加详细的使用说明
-3. 提交到 templates/ 目录
-4. 更新本 README
+3. **创建内核模板**
+```bash
+# 复制 Java 模板作为基础
+cp templates/java/kernel-template/00_系统总纲.md \
+   templates/go/kernel-template/
+
+# 修改为 Go 技术栈
+vim templates/go/kernel-template/00_系统总纲.md
+```
+
+模板示例：
+```markdown
+# 00_系统总纲.md
+
+**项目名称**: {{project.name}}
+
+## 技术栈
+- **语言**: Go {{tech.go_version}}
+- **框架**: {{tech.backend.framework}}  # Gin/Echo/Fiber
+- **数据库**: {{tech.database.type}}
+```
+
+4. **创建示例配置**
+```yaml
+# templates/go/project-config.example.yml
+project:
+  name: "示例项目"
+  code: "demo"
+  language: "go"
+
+tech:
+  go_version: "1.21"
+  backend:
+    framework: "Gin"
+  database:
+    type: "PostgreSQL"
+```
+
+5. **测试**
+```bash
+python scripts/init-project.py \
+  --config templates/go/project-config.example.yml \
+  --output ./test-go-project \
+  --language go
+```
 
 ---
 
-**维护人**: {MAINTAINER}
-**最后更新**: 2026-06-23
+## 🎨 模板语法速查
+
+### 变量插值
+```jinja2
+{{project.name}}              # 简单变量
+{{tech.backend.framework}}    # 嵌套对象
+{{modules[0].name}}           # 数组索引
+```
+
+### 条件渲染
+```jinja2
+{% if tech.microservices.enabled -%}
+微服务架构
+{% else -%}
+单体架构
+{% endif -%}
+```
+
+### 循环渲染
+```jinja2
+{% for module in modules -%}
+- {{module.name}}: {{module.description}}
+{% endfor -%}
+```
+
+### 过滤器
+```jinja2
+{{project.code | upper}}      # 大写
+{{project.code | capitalize}} # 首字母大写
+```
+
+---
+
+## 📊 当前状态
+
+| 语言 | 内核模板 | 配置 Schema | 示例配置 | 状态 |
+|------|---------|------------|---------|------|
+| Java | ✅ | ✅ | ✅ | 完成 |
+| Python | ⏳ | ✅ | ⏳ | 进行中 |
+| Node.js | ⏳ | ⏳ | ⏳ | 计划中 |
+| Go | ⏳ | ⏳ | ⏳ | 计划中 |
+
+---
+
+## 🔄 与原始 kernel-template 的关系
+
+### 迁移说明
+
+原始 `kernel-template/` 目录已迁移为：
+- **新位置**: `templates/java/kernel-template/`
+- **改造**: 从静态文本改为 Jinja2 模板
+- **原目录**: 保留作为向后兼容（暂不删除）
+
+### 使用建议
+
+- **新项目**: 使用 `templates/java/` + `init-project.py`
+- **旧项目**: 继续使用原 `kernel-template/` 手动复制
+
+---
+
+## 🎯 下一步计划
+
+1. ✅ 完成 Java 模板化改造
+2. ⏳ 完成 Python 内核模板
+3. ⏳ 完成 Node.js 内核模板
+4. ⏳ 添加自定义规范合并逻辑
+5. ⏳ Web UI 集成（表单 → 配置 → 初始化）
+
+---
+
+**最后更新**: 2026-06-24
+**维护者**: dongzi

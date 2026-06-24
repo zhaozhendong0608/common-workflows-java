@@ -1,0 +1,104 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Python 项目配置",
+  "type": "object",
+  "required": ["project", "tech"],
+  "properties": {
+    "project": {
+      "type": "object",
+      "required": ["name", "code", "owner"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "项目名称"
+        },
+        "code": {
+          "type": "string",
+          "description": "项目代号",
+          "pattern": "^[a-z][a-z0-9_]*$"
+        },
+        "owner": {
+          "type": "string",
+          "description": "技术负责人"
+        },
+        "language": {
+          "type": "string",
+          "enum": ["python"],
+          "default": "python"
+        }
+      }
+    },
+    "tech": {
+      "type": "object",
+      "properties": {
+        "python_version": {
+          "type": "string",
+          "enum": ["3.8", "3.9", "3.10", "3.11", "3.12"],
+          "default": "3.11"
+        },
+        "backend": {
+          "type": "object",
+          "properties": {
+            "framework": {
+              "type": "string",
+              "enum": ["Django", "FastAPI", "Flask", "Tornado"],
+              "default": "FastAPI"
+            },
+            "version": {
+              "type": "string"
+            }
+          }
+        },
+        "database": {
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "string",
+              "enum": ["PostgreSQL", "MySQL", "SQLite", "MongoDB"],
+              "default": "PostgreSQL"
+            },
+            "orm": {
+              "type": "string",
+              "enum": ["SQLAlchemy", "Django ORM", "Tortoise ORM", "Peewee"],
+              "default": "SQLAlchemy"
+            }
+          }
+        },
+        "cache": {
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "string",
+              "enum": ["Redis", "Memcached"],
+              "default": "Redis"
+            }
+          }
+        },
+        "frontend": {
+          "type": "object",
+          "properties": {
+            "framework": {
+              "type": "string",
+              "enum": ["Vue 3", "React", "None"],
+              "default": "Vue 3"
+            }
+          }
+        },
+        "async": {
+          "type": "object",
+          "properties": {
+            "enabled": {
+              "type": "boolean",
+              "default": true
+            },
+            "library": {
+              "type": "string",
+              "enum": ["asyncio", "uvloop"],
+              "default": "asyncio"
+            }
+          }
+        }
+      }
+    }
+  }
+}

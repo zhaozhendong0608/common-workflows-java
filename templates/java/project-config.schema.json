@@ -1,0 +1,188 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Java 项目配置",
+  "type": "object",
+  "required": ["project", "tech"],
+  "properties": {
+    "project": {
+      "type": "object",
+      "required": ["name", "code", "owner"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "项目名称",
+          "examples": ["智明工业数据智能分析平台"]
+        },
+        "code": {
+          "type": "string",
+          "description": "项目代号",
+          "pattern": "^[a-z][a-z0-9-]*$",
+          "examples": ["etl-station"]
+        },
+        "owner": {
+          "type": "string",
+          "description": "技术负责人",
+          "examples": ["张三"]
+        },
+        "description": {
+          "type": "string",
+          "description": "项目描述"
+        },
+        "language": {
+          "type": "string",
+          "enum": ["java"],
+          "default": "java"
+        }
+      }
+    },
+    "tech": {
+      "type": "object",
+      "properties": {
+        "backend": {
+          "type": "object",
+          "properties": {
+            "framework": {
+              "type": "string",
+              "enum": ["Spring Boot", "Spring Cloud", "Quarkus", "Micronaut"],
+              "default": "Spring Boot"
+            },
+            "version": {
+              "type": "string",
+              "examples": ["2.7.5", "3.2.0"]
+            },
+            "java_version": {
+              "type": "string",
+              "enum": ["8", "11", "17", "21"],
+              "default": "17"
+            }
+          }
+        },
+        "database": {
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "string",
+              "enum": ["MySQL", "PostgreSQL", "Oracle", "SQL Server", "TDengine"],
+              "default": "MySQL"
+            },
+            "version": {
+              "type": "string",
+              "examples": ["8.0", "15.0"]
+            }
+          }
+        },
+        "cache": {
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "string",
+              "enum": ["Redis", "Memcached", "Caffeine"],
+              "default": "Redis"
+            },
+            "version": {
+              "type": "string",
+              "examples": ["7.0", "6.2"]
+            }
+          }
+        },
+        "orm": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "enum": ["MyBatis Plus", "MyBatis", "JPA", "Hibernate"],
+              "default": "MyBatis Plus"
+            },
+            "version": {
+              "type": "string",
+              "examples": ["3.5.3"]
+            }
+          }
+        },
+        "frontend": {
+          "type": "object",
+          "properties": {
+            "framework": {
+              "type": "string",
+              "enum": ["Vue 3", "React", "Angular", "None"],
+              "default": "Vue 3"
+            },
+            "version": {
+              "type": "string",
+              "examples": ["3.2", "18.0"]
+            },
+            "ui_library": {
+              "type": "string",
+              "enum": ["Element Plus", "Ant Design", "Naive UI", "Arco Design"],
+              "default": "Element Plus"
+            },
+            "build_tool": {
+              "type": "string",
+              "enum": ["Vite", "Webpack", "Rollup"],
+              "default": "Vite"
+            }
+          }
+        },
+        "microservices": {
+          "type": "object",
+          "properties": {
+            "enabled": {
+              "type": "boolean",
+              "default": false
+            },
+            "registry": {
+              "type": "string",
+              "enum": ["Nacos", "Eureka", "Consul", "Zookeeper"],
+              "default": "Nacos"
+            },
+            "gateway": {
+              "type": "string",
+              "enum": ["Spring Cloud Gateway", "Zuul", "Kong"],
+              "default": "Spring Cloud Gateway"
+            },
+            "mq": {
+              "type": "string",
+              "enum": ["RabbitMQ", "Kafka", "RocketMQ", "None"],
+              "default": "RabbitMQ"
+            }
+          }
+        }
+      }
+    },
+    "custom": {
+      "type": "object",
+      "properties": {
+        "coding_standards": {
+          "type": "string",
+          "description": "自定义编码规范文件路径",
+          "examples": ["./custom-standards/java-style.md"]
+        },
+        "architecture_standards": {
+          "type": "string",
+          "description": "自定义架构规范文件路径"
+        }
+      }
+    },
+    "modules": {
+      "type": "array",
+      "description": "业务模块列表",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "examples": ["用户管理", "设备管理"]
+          },
+          "code": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9-]*$",
+            "examples": ["user", "device"]
+          },
+          "description": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

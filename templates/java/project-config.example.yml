@@ -1,0 +1,55 @@
+# 项目配置示例 - Java + Vue 3
+
+project:
+  name: "智明工业数据智能分析平台"
+  code: "etl-station"
+  owner: "张三"
+  description: "为工业企业提供数据采集、分析、可视化的一体化解决方案"
+  language: "java"
+
+tech:
+  backend:
+    framework: "Spring Boot"
+    version: "2.7.5"
+    java_version: "17"
+  
+  database:
+    type: "MySQL"
+    version: "8.0"
+  
+  cache:
+    type: "Redis"
+    version: "7.0"
+  
+  orm:
+    name: "MyBatis Plus"
+    version: "3.5.3"
+  
+  frontend:
+    framework: "Vue 3"
+    version: "3.2"
+    ui_library: "Element Plus"
+    build_tool: "Vite"
+  
+  microservices:
+    enabled: true
+    registry: "Nacos"
+    gateway: "Spring Cloud Gateway"
+    mq: "RabbitMQ"
+
+modules:
+  - name: "用户管理"
+    code: "user"
+    description: "用户认证、授权、角色管理"
+  
+  - name: "设备管理"
+    code: "device"
+    description: "设备接入、配置、监控"
+  
+  - name: "数据采集"
+    code: "collection"
+    description: "多协议数据采集与存储"
+
+custom:
+  coding_standards: null  # 留空使用默认规范
+  architecture_standards: null
